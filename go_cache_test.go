@@ -10,10 +10,10 @@ func TestCache_Get(t *testing.T) {
 	cache.Set(1, "test", time.Second)
 	val, err := cache.Get(1)
 	if err != nil {
-		t.Errorf("Failed Get() %v", err)
+		t.Errorf("Failed  %v : Get()", err)
 	}
 	if val != "test" {
-		t.Errorf("Expected %s Got %s", "test", val)
+		t.Errorf("Expected %s Got %s  : Get()", "test", val)
 	}
 
 }
@@ -25,7 +25,7 @@ func TestCache_Set(t *testing.T) {
 		t.Errorf("Did not add item to cache")
 	}
 	if val != "test" {
-		t.Errorf("Did not store correct value")
+		t.Errorf("Did not store correct value : Set()")
 	}
 }
 func TestCache_Remove(t *testing.T) {
@@ -33,6 +33,6 @@ func TestCache_Remove(t *testing.T) {
 	cache.Set(1, "test", time.Second)
 	ok, err := cache.Remove(1)
 	if !ok {
-		t.Errorf("Did not remove item from the cache %v", err)
+		t.Errorf("Did not remove item from the cache %v : Remove()", err)
 	}
 }
