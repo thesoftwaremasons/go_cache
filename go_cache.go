@@ -7,7 +7,7 @@ import (
 )
 
 type Cache struct {
-	items map[any]cacheItem
+	items map[any]*cacheItem
 	mutex sync.RWMutex
 }
 type cacheItem struct {
@@ -18,7 +18,7 @@ type cacheItem struct {
 const defaultValue = "default value"
 
 func NewCache() *Cache {
-	return &Cache{items: make(map[any]cacheItem)}
+	return &Cache{items: make(map[any]*cacheItem)}
 }
 func (c *Cache) Get(key any) (any, error) {
 	c.mutex.RLock()
@@ -35,7 +35,7 @@ func (c *Cache) Get(key any) (any, error) {
 }
 func (c *Cache) Set(key, value any, duration time.Duration) {
 	expiration := time.Now().Add(duration)
-	item := cacheItem{
+	item := &cacheItem{
 		value:      value,
 		expiration: expiration,
 	}
